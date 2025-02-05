@@ -33,9 +33,9 @@ app.use("/classe",classeRoutes);
 app.use("/matiere",matiereRoutes);
 
 //
-app.get("*",checkUser,(req,res,next)=>{
-    next();
-})
+// app.get("*",checkUser,(req,res,next)=>{
+//     next();
+// })
 
 
 app.listen(PORT,()=>console.log(`Serveur running on port ${PORT}`));

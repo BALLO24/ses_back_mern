@@ -1,5 +1,5 @@
 const { logout } = require("./auth.controller");
-const userModel=require("../model/user.model");
+const userModel=require("../model/user.model.old");
 const evalPromoModel=require("../model/eval.promotion.model");
 
 module.exports.deleteUser=async(req,res)=>{

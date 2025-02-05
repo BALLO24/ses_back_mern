@@ -1,25 +1,25 @@
 const mongoose=require("mongoose");
 
-const divisionModel=new mongoose.Schema({
+const divisionSchema=new mongoose.Schema({
     sigle:{
         type:"String",
-        require:true,
+        required:true,
         unique:true,
     },
     nom:{
         type:"String",
-        require:true,
+        required:true,
         unique:true
     },
-    id_chef_division:{
+    chef_division:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"users",
-        require:true,
+        required:true,
     }
 },
 {
     timestamps:true,
 });
 
-const divisionSchema=mongoose.model("divisions",divisionModel);
-module.exports=divisionSchema;
+const division=mongoose.model("divisions",divisionSchema);
+module.exports=division;

@@ -15,16 +15,18 @@ const promotionSchema = new mongoose.Schema({
     default:null
   },
   classe:{
-    type:"String",
-    enum:["tsEI","ingEI","tM","tsM","ingM","tNA","tsNA","ingNA"],
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"classes",
+    required:true,
+    //enum:["tsEI","ingEI","tM","tsM","ingM","tNA","tsNA","ingNA"],
     default:null,
   },
-  id_chef_promo:{
+  chef_promo:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"users",
     required:true,
   },
-  id_division:{
+  division:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"divisions",
     required:true,

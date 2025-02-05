@@ -1,9 +1,9 @@
-const divisionModel=require("../model/division.model");
+const division=require("../model/division.model");
 module.exports.addDivision=async (req,res)=>{
     //const infosDivision={...req.body};
-    const {sigle,nom,id_chef_division}=req.body
+    const {sigle,nom,chef_division}=req.body
 try{
-    const newDivision=await divisionModel.create({sigle,nom,id_chef_division})
+    const newDivision=await division.create({sigle,nom,chef_division})
     if(newDivision){
         res.status(200).json({message:"Division ajoutée avec success"})
     }
@@ -19,9 +19,9 @@ catch(err){
 module.exports.deleteDivision=async(req,res)=>{
     const {id}=req.params
     try{
-        const division=await divisionModel.findOne({_id:id});
+        const division=await division.findOne({_id:id});
         if(division){
-            const result=await divisionModel.deleteOne({_id:id})
+            const result=await division.deleteOne({_id:id})
             if(result){
                 res.status(200).json({message:"Division supprimée avec succès"})
             }
