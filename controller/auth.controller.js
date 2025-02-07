@@ -1,4 +1,4 @@
-const {eleve,enseignant}=require("../model/user.model")
+const {user,eleve,enseignant}=require("../model/user.model")
 const {createToken}=require("../utils/auth.utils");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
@@ -22,10 +22,50 @@ const maxAge=3*24*3600*1000;
         }   
     
         await user.save();
-        res.status(201).json({ message: "Utilisateur créé avec succes" });
+        return res.status(201).json({ message: "Utilisateur créé avec succes" });
   
     }
    catch(err){
     console.log(err);
-    res.status(400).json({err})}
+    return res.status(400).json({err})}
+}
+
+
+
+module.exports.signIn=async (req,res)=>{
+   
+    try{
+     const {email,password}={...req.body}
+     console.log(email);
+     
+    //Gestion de l'identification
+     const user1=await user.findOne({email});
+     if(!user1){
+        console.log("no user");
+        return res.status(404).json({message:"Utilisateur non trouvé"})
+        
+        
+     }
+
+     const isMatch=await bcrypt.compare(password,user1.password);
+     if(!isMatch){
+        console.log("no good mdp");
+        return res.status(401).json({message:"Mot de passe incorrect"})
+     }
+     //Generer un token
+     const token=createToken(user._id);
+    //Sauvegarder le token dans les cookies
+     res.cookie("jwt",token,{httpOnly:true,maxAge})
+     return res.status(200).json({username:user1.firstname})
+    }
+    catch(err){
+     console.log(err);
+     return res.status(400).json(err)}
+ }
+
+
+ module.exports.logout=(req,res,next)=>{
+    res.cookie('jwt','',{maxAge:1});
+    //res.redirect("/")
+    res.send("deleted ok");
 }

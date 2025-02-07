@@ -4,7 +4,7 @@ const matiereSchema=new mongoose.Schema({
         type:"String",
         required:true
     },
-    id_classe:{
+    classe:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"classes",
         required:true
@@ -13,5 +13,5 @@ const matiereSchema=new mongoose.Schema({
     timestamps:true
 })
 
-const matiereModel=mongoose.model("matieres",matiereSchema);
-module.exports=matiereModel;
+const Matiere=mongoose.model("matieres",matiereSchema);
+module.exports=Matiere;

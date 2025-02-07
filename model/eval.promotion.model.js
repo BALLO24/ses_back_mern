@@ -31,5 +31,5 @@ const evalPromoSchema=new mongoose.Schema({
     timestamps:true
 });
 
-const evalPromoModel=mongoose.model("evalPromotions",evalPromoSchema);
-module.exports=evalPromoModel;
+const EvalPromotion=mongoose.model("evalPromotions",evalPromoSchema);
+module.exports=EvalPromotion;
